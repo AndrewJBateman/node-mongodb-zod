@@ -1,10 +1,19 @@
 import express from "express";
+import config from "config";
+
+import connect from "./utils/connect";
+import logger from "./utils/logger";
+import routes from "./routes";
+import deserializeUser from "./middleware/deserializedUser";
+
+const port = config.get<number>("port");
 
 const app = express();
-
 app.use(express.json());
+app.use(deserializeUser);
 
-const port = 1337;
 app.listen(port, async () => {
-	console.log("app is listening on port", port);
+	logger.info(`App is running at http://localhost:${port}`);
+	await connect();
+	routes(app);
 });
