@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import config from "config";
 
+// user interface to match user schema
 export interface UserDocument extends mongoose.Document {
 	email: string;
 	name: string;
@@ -29,6 +30,7 @@ const userSchema = new mongoose.Schema(
 	}
 );
 
+// replace user password with hashed version
 userSchema.pre("save", async function (next) {
 	let user = this as UserDocument;
 
@@ -37,14 +39,14 @@ userSchema.pre("save", async function (next) {
 	}
 
 	const salt = await bcrypt.genSalt(config.get<number>("saltWorkFactor"));
-
-	const hash = await bcrypt.hashSync(user.password, salt);
+	const hash = bcrypt.hashSync(user.password, salt);
 
 	user.password = hash;
 
 	return next();
 });
 
+// use bcrypt to compare database user password with inputted (candidate) password
 userSchema.methods.comparePassword = async function (
 	candidatePassword: string
 ): Promise<boolean> {
