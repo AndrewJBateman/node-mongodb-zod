@@ -7,41 +7,42 @@ import {
 } from "../services/session.service";
 import { validatePassword } from "../services/user.service";
 import { signJwt } from "../utils/jwt.utils";
+import logger from "../utils/logger";
 
 // create user session with access token if password correct
-export async function createUserSessionHandler(req: Request, res: Response) {
-	// Validate the user's password
-	const user = await validatePassword(req.body);
+export const createUserSessionHandler = async (req: Request, res: Response) => {
+	try {
+		const user = await validatePassword(req.body);
 
-	if (!user) {
-		return res.status(401).send("Invalid email or password");
+		if (!user) {
+			return res.status(401).send("Invalid email or password");
+		}
+
+		const session = await createSession(user._id, req.get("user-agent") || "");
+
+		const accessToken = signJwt(
+			{ ...user, session: session._id },
+			{ expiresIn: config.get("accessTokenTtl") }
+		);
+
+		const refreshToken = signJwt(
+			{ ...user, session: session._id },
+			{ expiresIn: config.get("refreshTokenTtl") }
+		);
+
+		return res.send({ accessToken, refreshToken });
+	} catch (err: any) {
+		logger.error(err);
+		return res.status(409).send(err.message);
 	}
+};
 
-	// create a session
-	const session = await createSession(user._id, req.get("user-agent") || "");
-
-	// create an access token
-	const accessToken = signJwt(
-		{ ...user, session: session._id },
-		{ expiresIn: config.get("accessTokenTtl") } // 15 minutes
-	);
-
-	// create a refresh token
-	const refreshToken = signJwt(
-		{ ...user, session: session._id },
-		{ expiresIn: config.get("refreshTokenTtl") } // 15 minutes
-	);
-
-	// return access & refresh tokens
-	return res.send({ accessToken, refreshToken });
-}
-
-export async function getUserSessionsHandler(req: Request, res: Response) {
+export const getUserSessionsHandler = async (req: Request, res: Response) => {
 	const userId = res.locals.user._id;
 	const sessions = await findSessions({ user: userId, valid: true });
 
 	return res.send(sessions);
-}
+};
 
 export async function deleteSessionHandler(req: Request, res: Response) {
 	const sessionId = res.locals.user.session;
