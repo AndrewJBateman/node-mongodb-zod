@@ -3,13 +3,16 @@ import bcrypt from "bcrypt";
 import config from "config";
 
 // user interface to match user schema
-export interface UserDocument extends mongoose.Document {
-	email: string;
-	name: string;
-	password: string;
-	createdAt: Date;
-	updatedAt: Date;
-  comparePassword(candidatePassword: string): Promise<Boolean>
+export interface UserInput {
+  email: string;
+  name: string;
+  password: string;
+}
+
+export interface UserDocument extends UserInput, mongoose.Document {
+  createdAt: Date;
+  updatedAt: Date;
+  comparePassword(candidatePassword: string): Promise<Boolean>;
 }
 
 const userSchema = new mongoose.Schema(
