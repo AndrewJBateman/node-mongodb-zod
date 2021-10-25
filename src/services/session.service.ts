@@ -6,39 +6,36 @@ import { verifyJwt, signJwt } from "../utils/jwt.utils";
 import { findUser } from "./user.service";
 
 // create user session for input user id and user agent
-export async function createSession(userId: string, userAgent: string) {
+export const createSession = async (userId: string, userAgent: string) => {
 	const session = await SessionModel.create({ user: userId, userAgent });
 
 	return session.toJSON();
-}
+};
 
 // find a user session using mongoose find function with a lean filter - return Plain Old Object
-export async function findSessions(query: FilterQuery<SessionDocument>) {
+export const findSessions = async (query: FilterQuery<SessionDocument>) => {
 	return SessionModel.find(query).lean();
-}
+};
 
-export async function updateSession(
+export const updateSession = async (
 	query: FilterQuery<SessionDocument>,
 	update: UpdateQuery<SessionDocument>
-) {
+) => {
 	return SessionModel.updateOne(query, update);
-}
+};
 
-export async function reIssueAccessToken({
+export const reIssueAccessToken = async ({
 	refreshToken,
 }: {
 	refreshToken: string;
-}) {
+}) => {
 	const { decoded } = verifyJwt(refreshToken);
-
 	if (!decoded || !get(decoded, "session")) return false;
 
 	const session = await SessionModel.findById(get(decoded, "session"));
-
 	if (!session || !session.valid) return false;
 
 	const user = await findUser({ _id: session.user });
-
 	if (!user) return false;
 
 	const accessToken = signJwt(
@@ -47,4 +44,4 @@ export async function reIssueAccessToken({
 	);
 
 	return accessToken;
-}
+};

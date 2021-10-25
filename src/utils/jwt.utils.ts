@@ -4,15 +4,18 @@ import config from "config";
 const privateKey = config.get<string>("privateKey");
 const publicKey = config.get<string>("publicKey");
 
-export function signJwt(object: Object, options?: jwt.SignOptions | undefined) {
+export const signJwt = (
+	object: Object,
+	options?: jwt.SignOptions | undefined
+) => {
 	return jwt.sign(object, privateKey, {
 		...(options && options),
 		algorithm: "RS256",
 	});
-}
+};
 
 // verify token by comparing with the one in the config file
-export function verifyJwt(token: string) {
+export const verifyJwt = (token: string) => {
 	try {
 		const decoded = jwt.verify(token, publicKey);
 		return {
@@ -20,12 +23,12 @@ export function verifyJwt(token: string) {
 			expired: false,
 			decoded,
 		};
-	} catch (e: any) {
-		console.error(e);
+	} catch (err: any) {
+		console.error(err);
 		return {
 			valid: false,
-			expired: e.message === "jwt expired",
+			expired: err.message === "jwt expired",
 			decoded: null,
 		};
 	}
-}
+};
