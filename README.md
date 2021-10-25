@@ -50,16 +50,17 @@
 
 ## :floppy_disk: Setup
 
-* Install dependencies
-* Create `.env` and add database credentials
-* Create public & private keys using the [JWT RS256 algorithm](https://jwt.io/)
+* `npm i` to install dependencies
+* Create `.env` and add database credentials - see `.example.env`
+* Create public & private keys using [JWT](https://jwt.io/) with the RS256 algorithm option selected. Take care with the format and the `-----END PRIVATE KEY----` etc. to avoid an "ERR_OSSL_PEM_BAD_END_LINE" error
 * MongoDB has to be running - I use the cloud database MongoDB Atlas instead of installing MongoDB on my hard drive
-* `yarn dev` or `npm run dev` runs app in the development mode with auto-restart. Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
+* `yarn dev` or `npm run dev` runs app in the development mode with auto-restart.
+* Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
 
 ## :wrench: Testing
 
-* Postman used to simulate HTTP endpoints
-* POST Create User works, otthher functions to be tested
+* Postman and Thunder Client used to simulate HTTP endpoints
+* See `test.txt` for tests that have passed
 
 ## :computer: Code Examples
 
@@ -76,7 +77,7 @@
 ## :clipboard: Status, Testing & To-Do List
 
 * Status: Code complete and part tested
-* To-Do: Complete Postman testing
+* To-Do: Complete testing using Thunder Client
 
 ## :clap: Inspiration
 

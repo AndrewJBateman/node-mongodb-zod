@@ -1,0 +1,63 @@
+1. User
+
+POST new user to "http://localhost:1337/api/users"
+
+{
+	"email": "test2@test.com",
+	"password": "test2pass",
+	"passwordConfirmation": "test2pass",
+	"name": "John Wick"
+}
+
+
+2. Session
+
+POST user login data to "http://localhost:1337/api/sessions" to generate an access token
+
+{
+    "email": "test5@test.com",
+    "password": "test5pass"
+}
+
+Response: {
+  "accessToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTc2OGJlZjEzMzdlMTZkYTBmNDk4NjgiLCJlbWFpbCI6InRlc3Q1QHRlc3QuY29tIiwibmFtZSI6IkpvaG4gV2ljayA1IiwiY3JlYXRlZEF0IjoiMjAyMS0xMC0yNVQxMDo1MDoyMy43MzRaIiwidXBkYXRlZEF0IjoiMjAyMS0xMC0yNVQxMDo1MDoyMy43MzRaIiwiX192IjowLCJzZXNzaW9uIjoiNjE3NjhjN2RjNzRkZjUzZjQ4YjU3MmQwIiwiaWF0IjoxNjM1MTU5MTY2LCJleHAiOjE2MzUxNjAwNjZ9.L-okO3hBXfQk0xoymH9f2ryGlmu24OnRIa2kPGCliWf4EcdUr0T2vevHDqrA4yFHRI-kXZDvhzK58xdZ9t5w8unUJcPmz2fRNoV38Qp9lXjLB62Y5tbNvYBJFU5HbiVbkLrCY5vp53IUevneAzVE8O7JYeXi-a0iXMwlLivGM0k",
+  "refreshToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTc2OGJlZjEzMzdlMTZkYTBmNDk4NjgiLCJlbWFpbCI6InRlc3Q1QHRlc3QuY29tIiwibmFtZSI6IkpvaG4gV2ljayA1IiwiY3JlYXRlZEF0IjoiMjAyMS0xMC0yNVQxMDo1MDoyMy43MzRaIiwidXBkYXRlZEF0IjoiMjAyMS0xMC0yNVQxMDo1MDoyMy43MzRaIiwiX192IjowLCJzZXNzaW9uIjoiNjE3NjhjN2RjNzRkZjUzZjQ4YjU3MmQwIiwiaWF0IjoxNjM1MTU5MTY2LCJleHAiOjE2NjY3MTY3NjZ9.YixYV9gXxpL1TSNfJRRKClMugmQ89-zpM7ioNzyTFQ0uadfBrzivxekvh_0WUXFnBk3H-7QlFECSNgPKGBEoJ_HHAgWe9QLmveoETx6sf8fpj8RmfEg97auSDLc4lukoNyHZfY5DuWkrOYc0xDzVOE09rPY7fXoZqAlCFRxF810"
+}
+
+GET session from "http://localhost:1337/api/sessions"
+
+Headers: x-refresh: refresh token
+Auth: Bearer Token: access token
+Body: none
+
+
+3. Products
+
+POST product to "http://localhost:1337/api/products"
+
+Headers: x-refresh: refresh token
+Auth: Bearer Token: access token
+Body: {
+    "title": "Canon EOS 1500D DSLR Camera with 18-55mm Lens",
+    "description": "Designed for first-time DSLR owners who want impressive results straight out of the box, capture those magic moments no matter your level with the EOS 1500D. With easy to use automatic shooting modes, large 24.1 MP sensor, Canon Camera Connect app integration and built-in feature guide, EOS 1500D is always ready to go.",
+    "price": 879.99,
+    "image": "https://i.imgur.com/QlRphfQ.jpg"
+}
+
+Response: {
+  "user": "61768bef1337e16da0f49868",
+  "title": "Canon EOS 1500D DSLR Camera with 18-55mm Lens",
+  "description": "Designed for first-time DSLR owners who want impressive results straight out of the box, capture those magic moments no matter your level with the EOS 1500D. With easy to use automatic shooting modes, large 24.1 MP sensor, Canon Camera Connect app integration and built-in feature guide, EOS 1500D is always ready to go.",
+  "price": 879.99,
+  "image": "https://i.imgur.com/QlRphfQ.jpg",
+  "_id": "6176962b74286bc1feeffcff",
+  "productId": "product_56kxfm6eot",
+  "createdAt": "2021-10-25T11:34:03.446Z",
+  "updatedAt": "2021-10-25T11:34:03.446Z",
+  "__v": 0
+}
+
+
+
+
+
