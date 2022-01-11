@@ -53,7 +53,7 @@
 * `npm i` to install dependencies
 * Create `.env` and add database credentials - see `.example.env`
 * Create public & private keys using [JWT](https://jwt.io/) with the RS256 algorithm option selected. Take care with the format and the `-----END PRIVATE KEY----` etc. to avoid an "ERR_OSSL_PEM_BAD_END_LINE" error
-* MongoDB has to be running - I use the cloud database MongoDB Atlas instead of installing MongoDB on my hard drive
+* MongoDB has to be running - I used the cloud database MongoDB Atlas instead of installing MongoDB on my hard drive
 * `yarn dev` or `npm run dev` runs app in the development mode with auto-restart.
 * Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
 
@@ -64,15 +64,26 @@
 
 ## :computer: Code Examples
 
-* tba
+* Function to create new user to schema format; email, password, password confirmation & name strings
 
-```javascript
-
+```typescript
+export const createUserHandler = async (
+  req: Request<{}, {}, CreateUserInput["body"]>,
+  res: Response
+) => {
+  try {
+    const user = await createUser(req.body);
+    return res.send(user);
+  } catch (err: any) {
+    logger.error(err);
+    return res.status(409).send(err.message);
+  }
+};
 ```
 
-## :cool: Features - Frontend
+## :cool: Features
 
-* tba
+* [Nano ID](https://www.npmjs.com/package/nanoid) id generator uses 21 symbols and is only 130bytes. 
 
 ## :clipboard: Status, Testing & To-Do List
 
@@ -81,7 +92,7 @@
 
 ## :clap: Inspiration
 
-* [Build a REST API with Node.js, Express, TypeScript, MongoDB & Zod](https://www.youtube.com/watch?v=BWUi6BS9T5Y&t=198s)
+* [TomDoesTech: Build a REST API with Node.js, Express, TypeScript, MongoDB & Zod](https://www.youtube.com/watch?v=BWUi6BS9T5Y&t=198s)
 
 ## :file_folder: License
 
