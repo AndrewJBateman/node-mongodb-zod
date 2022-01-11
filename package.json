@@ -15,29 +15,29 @@
 		"config": "^3.3.6",
 		"cors": "^2.8.5",
 		"dayjs": "^1.10.7",
-		"dotenv": "^10.0.0",
-		"express": "^4.17.1",
+		"dotenv": "^11.0.0",
+		"express": "^4.17.2",
 		"jsonwebtoken": "^8.5.1",
 		"lodash": "^4.17.21",
-		"mongoose": "^6.0.11",
+		"mongoose": "^6.1.6",
 		"nanoid": "^3.1.30",
-		"pino": "^7.0.2",
-		"zod": "^3.9.8"
+		"pino": "^7.6.3",
+		"zod": "^3.11.6"
 	},
 	"devDependencies": {
-		"pino-pretty": "^7.1.0",
+		"pino-pretty": "^7.3.0",
 		"@types/bcrypt": "^5.0.0",
-		"@types/body-parser": "^1.19.1",
-		"@types/config": "^0.0.39",
+		"@types/body-parser": "^1.19.2",
+		"@types/config": "^0.0.41",
 		"@types/cors": "^2.8.12",
 		"@types/express": "^4.17.13",
-		"@types/jsonwebtoken": "^8.5.5",
-		"@types/lodash": "^4.14.175",
+		"@types/jsonwebtoken": "^8.5.6",
+		"@types/lodash": "^4.14.178",
 		"@types/mongoose": "^5.11.97",
 		"@types/nanoid": "^3.0.0",
-		"@types/node": "^16.11.0",
-		"@types/pino": "^6.3.11",
+		"@types/node": "^17.0.8",
+		"@types/pino": "^7.0.4",
 		"ts-node-dev": "^1.1.8",
-		"typescript": "^4.4.4"
+		"typescript": "^4.5.4"
 	}
 }
