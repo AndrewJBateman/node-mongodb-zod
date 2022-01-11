@@ -4,11 +4,11 @@ const dbPass = process.env.DB_PASS;
 const dbUri = process.env.DB_URI;
 const dbName = process.env.DB_NAME;
 export default {
-	port: 1337,
-	dbUrl: `mongodb+srv://${dbUser}:${dbPass}@${dbUri}/${dbName}?retryWrites=true&w=majority`,
-	saltWorkFactor: 10,
-	accessTokenTtl: "59m",
-	refreshTokenTtl: "1y",
+  port: 1337,
+  dbUrl: `mongodb+srv://${dbUser}:${dbPass}@${dbUri}/${dbName}?retryWrites=true&w=majority`,
+  saltWorkFactor: 10,
+  accessTokenTtl: "59m",
+  refreshTokenTtl: "1y",
   publicKey: `-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCXzZerpx9qdaelwt1U7NCpWXQK
 km1OW4ohDF/7g01xDtYf8Nox9wzhhVQrFD+G4eaJoWxIhJYQTgT4ijMlpjXs07Mc

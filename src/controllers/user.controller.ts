@@ -15,4 +15,4 @@ export const createUserHandler = async (
     logger.error(err);
     return res.status(409).send(err.message);
   }
-}
+};

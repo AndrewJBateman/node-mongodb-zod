@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(deserializeUser);
 
 app.listen(port, async () => {
-	logger.info(`App is running at http://localhost:${port}`);
-	await connect();
-	routes(app);
+  logger.info(`App is running at http://localhost:${port}`);
+  await connect();
+  routes(app);
 });
